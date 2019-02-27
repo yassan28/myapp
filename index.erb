@@ -1,0 +1,40 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+</head>
+<body>
+    <div class="container">
+    <h1>IP&Host Map</h1>
+    <form method="post">
+        <input type="text" name="host" value="<%= params['host'] %>" placeholder="www.example.com or 127.0.0.1">
+        <input type="submit">
+    </form>
+
+    <% if @geo %>
+        <table>
+            <tr>
+                <td>IP</td>
+                <td><%= @ip %></td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td><%= @geo.country.name %></td>
+            </tr>
+            <tr>
+                <td>Subdivision</td>
+                <td><%= @geo.subdivisions[0].name %></td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td><%= @geo.city.name %></td>
+            </tr>
+        </table>
+        <iframe src="https://www.google.com/maps/embed/v1/place?q=<%= @geo.location.latitude %>,<%= @geo.location.longitude %>&zoom=10&key=AIzaSyAAb1Nx1f7E6uNrEEiukZV5z9XX3TqkDNw" 
+    width="600" height="300" allowfullscreen="allowfullscreen"></iframe>
+        (<div>This product includes GeoLite2 data created by MaxMind, available from
+<a href="http://www.maxmind.com">http://www.maxmind.com</a>.</div>)
+    <% end %>
+</body>    
+</html>
